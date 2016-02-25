@@ -13,6 +13,7 @@ before do
 end
 
 post '/autenticar' do
+  puts "autenticando"
   if UsuarioAPI.autenticar(params[:app_id], params[:clave])
     return RespuestaAPI.ok({ token: Token.generar })
   else
@@ -21,7 +22,7 @@ post '/autenticar' do
 end
 
 get '/estudiantes_y_asignaturas_en_periodo_academico/:periodo_academico_id' do
-  
+  puts '/estudiantes_y_asignaturas_en_periodo_academico/:periodo_academico_id'
   token = request.env["HTTP_CONEST_TOKEN"]
   if !Token.es_valido?(token)
     return RespuestaAPI.error("Token no válido")
@@ -158,6 +159,7 @@ get '/estudiantes_y_asignaturas_en_periodo_academico/:periodo_academico_id' do
 end
 
 get '/asignaturas_en_periodo_academico/:periodo_academico_id' do
+puts '/asignaturas_en_periodo_academico/:periodo_academico_id'
   
   token = request.env["HTTP_CONEST_TOKEN"]
   if !Token.es_valido?(token)
